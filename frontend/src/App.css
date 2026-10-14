@@ -1,0 +1,255 @@
+/* App.css: office hours design. One copy of every rule; do not append duplicates. */
+:root {
+  --ink: #14213D;
+  --paper: #D9E3F4;
+  --sheet: #FFFFFF;
+  --marker: #FFD23F;
+  --pencil: #AEBBD2;
+  --soft: #4F5A70;
+  --faint: #697487;
+  --stamp: #B3261E;
+  --radius: 10px;
+}
+
+body {
+  background: var(--paper);
+  color: var(--ink);
+  font-family: 'Bricolage Grotesque', system-ui, 'Segoe UI', Roboto, sans-serif;
+  font-size: 16px;
+  line-height: 1.45;
+}
+
+ul { list-style: none; }
+h1, h2 { line-height: 1.15; letter-spacing: -0.02em; }
+:focus-visible { outline: 3px solid var(--ink); outline-offset: 2px; }
+
+.muted { color: var(--soft); font-size: 14px; }
+
+/* Text for screen readers only */
+.sr-only {
+  position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+  overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0;
+}
+
+/* ---- Top bar ---- */
+.topbar { background: var(--sheet); border-bottom: 1px solid var(--pencil); }
+.topbar-inner {
+  max-width: 980px; margin: 0 auto; padding: 14px 20px;
+  display: flex; justify-content: space-between; align-items: center; gap: 16px;
+}
+.topbar-brand { font-weight: 800; font-size: 19px; letter-spacing: -0.01em; }
+.topbar-links { display: flex; gap: 22px; }
+.topbar-links a {
+  color: var(--soft); text-decoration: none; font-size: 15px; font-weight: 500;
+  padding: 4px 0; border-bottom: 3px solid transparent;
+}
+.topbar-links a:hover { color: var(--ink); }
+.topbar-links a.active { color: var(--ink); border-bottom-color: var(--marker); }
+
+/* ---- Page frame ---- */
+.page { max-width: 980px; margin: 0 auto; padding: 36px 20px 72px; }
+.page-header { margin-bottom: 28px; }
+.page-header h1 { font-size: clamp(26px, 4.5vw, 36px); font-weight: 800; margin-bottom: 6px; }
+.page-header p { color: var(--soft); }
+
+/* ---- Banners ---- */
+.banner-error, .banner-notice, .banner-success {
+  border-radius: var(--radius); padding: 12px 14px; font-size: 14px; margin-bottom: 20px; max-width: 620px;
+}
+.banner-error { background: #FBE9E7; color: #8C1D18; }
+.banner-notice { background: #FFF4C2; color: var(--ink); }
+.banner-success { background: var(--ink); color: #fff; }
+.banner-success a { color: var(--marker); font-weight: 500; }
+.banner-error.with-action {
+  display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap;
+}
+.link-btn {
+  background: none; border: none; color: inherit; font: inherit; font-size: 14px;
+  font-weight: 500; text-decoration: underline; cursor: pointer;
+}
+
+/* ---- Narrow pages: confirmation, manage, not found (placed after the banners so it wins) ---- */
+.page-narrow > * { max-width: 560px; }
+
+/* ---- Buttons and links ---- */
+.btn {
+  display: inline-flex; align-items: center; justify-content: center;
+  padding: 10px 18px; border-radius: 8px; border: 1.5px solid var(--ink);
+  background: transparent; color: var(--ink);
+  font: inherit; font-size: 15px; font-weight: 500; text-decoration: none; cursor: pointer;
+}
+.btn:hover:not(:disabled) { background: var(--marker); }
+.btn:disabled { opacity: 0.55; cursor: not-allowed; }
+.btn-small { padding: 7px 14px; font-size: 14px; }
+.btn-primary { background: var(--ink); color: #fff; align-self: flex-start; }
+.btn-primary:hover:not(:disabled) { background: #0B1426; }
+.btn-danger { background: var(--stamp); border-color: var(--stamp); color: #fff; }
+.btn-danger:hover:not(:disabled) { background: #8C1D18; }
+
+.text-link {
+  color: var(--ink); font-weight: 500; text-decoration: underline;
+  text-decoration-color: var(--marker); text-decoration-thickness: 3px; text-underline-offset: 3px;
+}
+.text-link:hover { background: var(--marker); }
+
+/* ---- Form fields ---- */
+.booking-form { display: flex; flex-direction: column; gap: 12px; padding-top: 4px; }
+.field { display: block; font-size: 14px; font-weight: 500; }
+.field input {
+  display: block; width: 100%; height: 42px; margin-top: 6px; padding: 0 12px;
+  background: #fff; color: var(--ink); border: 1.5px solid var(--ink); border-radius: 8px;
+  font: inherit; font-size: 15px; font-weight: 400;
+}
+.form-error { color: var(--stamp); font-size: 14px; font-weight: 500; }
+
+/* ---- Book page: two columns, stacked on phones ---- */
+.book-cols {
+  display: grid; grid-template-columns: minmax(250px, 300px) minmax(0, 1fr);
+  gap: 40px; align-items: start;
+}
+@media (max-width: 760px) {
+  .book-cols { grid-template-columns: minmax(0, 1fr); gap: 28px; }
+}
+
+/* ---- Week calendar ---- */
+/* The calendar is drawn inside an ink frame, like a wall calendar */
+.cal-panel { border: 1.5px solid var(--ink); border-radius: 14px; padding: 18px; }
+.cal-month { font-size: 16px; font-weight: 800; margin-bottom: 12px; }
+.cal { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 6px; }
+.cal-head { font-size: 13px; color: var(--soft); text-align: center; padding-bottom: 2px; }
+.cal-day {
+  background: var(--sheet); border: 1px solid var(--pencil); border-radius: var(--radius);
+  padding: 9px 8px 8px; color: var(--ink); font: inherit; text-align: center; cursor: pointer;
+}
+.cal-day:hover:not(:disabled):not(.selected) { border-color: var(--ink); }
+.cal-num { display: block; font-size: 18px; font-weight: 800; line-height: 1.1; }
+.cal-bar { display: block; height: 3px; margin-top: 6px; background: var(--ink); border-radius: 2px; }
+.cal-day.selected { background: var(--ink); border-color: var(--ink); color: #fff; }
+.cal-day.selected .cal-bar { background: var(--marker); }
+.cal-day.full {
+  background: transparent; border-style: dashed; border-color: var(--soft);
+  color: var(--soft); cursor: not-allowed;
+}
+.cal-day.full .cal-num { text-decoration: line-through; font-weight: 400; }
+.cal-note { margin-top: 12px; }
+
+/* ---- Sign-up sheet ---- */
+/* The sign-up sheet is a white sheet of paper lying on the tinted desk */
+.sheet-panel {
+  background: var(--sheet); border: 1.5px solid var(--ink);
+  border-radius: 14px; padding: 20px 22px 10px;
+}
+.sheet-title { font-size: 22px; font-weight: 800; }
+.sheet-sub { margin: 2px 0 8px; }
+.sheet-row { display: flex; align-items: center; gap: 12px; padding: 12px 0; font-weight: 500; }
+.sheet-time { font-variant-numeric: tabular-nums; }
+.sheet-leader {
+  flex: 1; min-width: 12px; border-bottom: 2px dotted var(--pencil); transform: translateY(4px);
+}
+.sheet-leader-hidden { border-color: transparent; }
+.sheet-book {
+  background: transparent; color: var(--ink); border: 1.5px solid var(--ink); border-radius: 8px;
+  padding: 4px 14px; font: inherit; font-size: 14px; font-weight: 500; cursor: pointer;
+}
+.sheet-book:hover { background: var(--marker); }
+.sheet-row.taken .sheet-time { color: var(--faint); text-decoration: line-through; font-weight: 400; }
+.sheet-tag { font-size: 14px; color: var(--stamp); }
+
+/* The row you picked: marker highlight that wipes in, with the form inside it */
+.sheet-pick {
+  margin: 4px -14px; padding: 0 14px 16px; border-radius: var(--radius);
+  background-image: linear-gradient(var(--marker), var(--marker));
+  background-repeat: no-repeat; background-position: left center; background-size: 100% 100%;
+  animation: marker-wipe 0.3s ease-out;
+}
+.sheet-time-pick { font-weight: 800; }
+@keyframes marker-wipe { from { background-size: 0% 100%; } }
+
+/* ---- Appointment card ---- */
+.ticket {
+  display: flex; background: var(--sheet); border: 1.5px solid var(--ink);
+  border-radius: 18px; overflow: hidden;
+}
+.ticket-main { flex: 1; min-width: 0; padding: 22px 26px 24px; }
+.ticket-label { font-size: 14px; color: var(--soft); }
+.ticket-date { display: flex; align-items: flex-end; gap: 14px; margin: 6px 0 10px; }
+.ticket-day { font-size: 96px; font-weight: 800; letter-spacing: -0.04em; line-height: 0.9; }
+.ticket-month { font-size: 18px; font-weight: 500; padding-bottom: 6px; line-height: 1.3; }
+.ticket-time { font-size: 22px; font-weight: 800; letter-spacing: -0.01em; }
+.ticket-who { font-size: 14px; color: var(--soft); margin-top: 6px; overflow-wrap: anywhere; }
+
+/* The stub: marker yellow, torn off along a dashed line, with a notch at each end */
+.ticket-stub {
+  position: relative; flex: 0 0 118px; background: var(--marker);
+  border-left: 2px dashed var(--ink); display: flex; align-items: center; justify-content: center;
+}
+.ticket-notch {
+  position: absolute; left: -10px; width: 18px; height: 18px; border-radius: 50%;
+  background: var(--paper); border: 1.5px solid var(--ink);
+}
+.ticket-notch.top { top: -10px; }
+.ticket-notch.bottom { bottom: -10px; }
+.ticket-code {
+  writing-mode: vertical-rl; transform: rotate(180deg);
+  font-size: 27px; font-weight: 800; letter-spacing: 0.14em;
+}
+@media (max-width: 480px) {
+  .ticket-main { padding: 18px 18px 20px; }
+  .ticket-day { font-size: 72px; }
+  .ticket-stub { flex-basis: 84px; }
+  .ticket-code { font-size: 21px; }
+}
+
+.ticket-actions { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 18px; }
+.ticket-links { display: flex; gap: 22px; flex-wrap: wrap; margin-top: 22px; font-size: 15px; }
+
+/* ---- Manage page ---- */
+.lookup-row { display: flex; gap: 12px; align-items: flex-end; flex-wrap: wrap; margin-bottom: 28px; }
+.lookup-field { flex: 1 1 220px; }
+.lookup-field input { letter-spacing: 0.08em; text-transform: uppercase; }
+.lookup-row .btn { height: 42px; }
+.manage-actions { margin-top: 18px; }
+.action-row { display: flex; gap: 10px; flex-wrap: wrap; }
+.cancel-confirm {
+  background: #FBE9E7; border-radius: var(--radius); padding: 14px 16px;
+  display: flex; flex-direction: column; gap: 12px; font-size: 15px;
+}
+
+/* ---- Loading placeholders ---- */
+@keyframes shimmer {
+  0%   { background-position: -200px 0; }
+  100% { background-position: calc(200px + 100%) 0; }
+}
+.skeleton {
+  background: linear-gradient(90deg, #EAF0F9 25%, #F7F9FD 37%, #EAF0F9 63%);
+  background-size: 400px 100%; animation: shimmer 1.4s ease infinite; border-radius: var(--radius);
+}
+.skeleton-day { height: 64px; }
+.skeleton-row { height: 46px; margin-bottom: 10px; border-radius: 8px; }
+.skeleton-ticket { height: 215px; border-radius: 18px; }
+
+@media (prefers-reduced-motion: reduce) {
+  .skeleton, .sheet-pick { animation: none; }
+}
+
+/* ---- Emoji decorations ----
+   The second content line adds an empty alt text, so screen readers skip them.
+   Browsers that don't understand it ignore that line and use the first one.
+   Inline elements keep a trailing space; the flex buttons use margin-right instead,
+   because a space at the end of a flex item is trimmed away. */
+.topbar-brand::before { content: '🎓 '; content: '🎓 ' / ''; }
+.cal-month::before { content: '🗓️ '; content: '🗓️ ' / ''; }
+.sheet-title::before { content: '🕘 '; content: '🕘 ' / ''; }
+.sheet-tag::before { content: '🔒 '; content: '🔒 ' / ''; }
+
+.banner-notice::before { content: '💬 '; content: '💬 ' / ''; }
+.banner-success::before { content: '✅ '; content: '✅ ' / ''; }
+.banner-error::before { content: '⚠️ '; content: '⚠️ ' / ''; }
+/* The error banner with a "Try again" button is a flex row, so the emoji goes inside its text */
+.banner-error.with-action::before { content: none; }
+.banner-error.with-action > span::before { content: '⚠️ '; content: '⚠️ ' / ''; }
+
+.booking-form .btn-primary::before { content: '✅'; content: '✅' / ''; margin-right: 8px; }
+.ticket-actions > :nth-child(1)::before { content: '📅'; content: '📅' / ''; margin-right: 8px; }
+.ticket-actions > :nth-child(2)::before { content: '⬇️'; content: '⬇️' / ''; margin-right: 8px; }
+.ticket-actions > :nth-child(3)::before { content: '📋'; content: '📋' / ''; margin-right: 8px; }
